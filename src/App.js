@@ -25,9 +25,7 @@ function AudioPlayer(song) {
   return (
     <div>
       <audio ref={audioRef} key={audioUrl} controls={showControls}>
-        <source
-          src={"https://www.front-music.pl/data/free/086-front-music.pl.mp3"}
-        />
+        <source src={audioUrl} />
       </audio>
 
       <br />
@@ -42,26 +40,46 @@ export default function App() {
     {},
 
     {
-      url: "https://www.front-music.pl/data/free/090-front-music.pl.mp3",
+      title: "pretty music",
+      audioUrl: "https://www.front-music.pl/data/free/090-front-music.pl.mp3",
       id: 1
     },
     {
-      url: "https://www.front-music.pl/data/free/152-front-music.pl.mp3",
+      title: "beatyful",
+      audioUrl: "https://www.front-music.pl/data/free/152-front-music.pl.mp3",
       id: 2
     },
     {
-      url: "https://www.front-music.pl/data/free/174-front-music.pl.mp3",
+      title: "my favorite",
+      audioUrl: "https://www.front-music.pl/data/free/174-front-music.pl.mp3",
       id: 3
     },
     {
-      url: "https://www.front-music.pl/data/free/487-front-music.pl.mp3",
+      title: "the best",
+      audioUrl: "https://www.front-music.pl/data/free/487-front-music.pl.mp3",
       id: 4
     },
     {
-      url: "https://www.front-music.pl/data/free/155-front-music.pl.mp3",
+      title: "top of the songs",
+      audioUrl: "https://www.front-music.pl/data/free/155-front-music.pl.mp3",
       id: 5
     }
   ];
+  const [currentSongIndex, setCurrentSongIndex] = useState(0);
+  var currentSong = songs[currentSongIndex];
+
+  function handleSelectSong(selectedSong) {
+    const audioIndex = songs.findIndex(
+      (song) => song.audioUrl === selectedSong.audioUrl
+    );
+    if (audioIndex >= 0) {
+      // setFormerInd(currentSongIndex); //setFormerIndex
+      setCurrentSongIndex(audioIndex); //
+      console.log(audioIndex);
+      // console.log("former, current", formerSongInd, currentSongIndex);
+    }
+  }
+
   return (
     <div className="App">
       <h1>Hello CodeSandbox</h1>
@@ -69,7 +87,15 @@ export default function App() {
 
       <AudioPlayer song={songs} />
       <ul>
-        {songs.map((song) => song.url)}
+        {songs.map((song) => (
+          <SongListItem
+            key={song.audioUrl}
+            song={song}
+            //isCurrent={currentSong.audioUrl === song.audioUrl} //highlihted
+            onSelect={handleSelectSong}
+            currentSongIndex
+          />
+        ))}
         <br />
       </ul>
     </div>
