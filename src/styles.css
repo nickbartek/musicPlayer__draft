@@ -2,3 +2,14 @@
   font-family: sans-serif;
   text-align: center;
 }
+body {
+  background: #002000;
+  color: rgb(249, 245, 000);
+  margin: 0;
+  font-family: sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100vh;
+}

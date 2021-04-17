@@ -15,13 +15,13 @@ function SongListItem({ song, isCurrent, onSelect }) {
   );
 }
 
-function AudioPlayer(song) {
+function AudioPlayer({ song }) {
   const audioRef = useRef();
   var [showControls, setshow] = useState(false);
   const { audioUrl, id } = song;
   // var  audioUrl  = "https://www.front-music.pl/data/free/086-front-music.pl.mp3";
 
-  console.log(song, audioUrl, id);
+  console.log(audioUrl, id);
   return (
     <div>
       <audio ref={audioRef} key={audioUrl} controls={showControls}>
@@ -85,7 +85,7 @@ export default function App() {
       <h1>Hello CodeSandbox</h1>
       <h2>Start editing to see some magic happen!</h2>
 
-      <AudioPlayer song={songs} />
+      <AudioPlayer song={currentSong} />
       <ul>
         {songs.map((song) => (
           <SongListItem
